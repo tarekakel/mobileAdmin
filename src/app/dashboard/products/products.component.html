@@ -1,0 +1,438 @@
+<!-- Navbar -->
+<nav class="main-header navbar navbar-expand navbar-white navbar-light">
+  <!-- Left navbar links -->
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fa fa-bars"></i></a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a class="btn btn-default" data-toggle="modal" data-target="#AddModal" (click)="Initilize()">Add</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a class="btn btn-default" data-toggle="modal" data-target="#EditModal" (click)="Initilize()">Edit</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a class="btn btn-default" data-toggle="modal" data-target="#DeleteModal">Delete</a>
+    </li>
+    <li class="nav-item d-none d-sm-inline-block">
+      <a class="btn btn-default text-danger" data-toggle="modal" data-target="#ProductImgsModal">Product Images</a>
+    </li>
+  </ul>
+
+  <!-- Right navbar links -->
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item d-none d-sm-inline-block">
+      <a href="#" class="nav-link">Ramez Bazna</a>
+    </li>
+  </ul>
+</nav>
+<!-- /.navbar -->
+
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Products Form</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item">Forms</li>
+              <li class="breadcrumb-item active">Products Form</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+
+              <div class="card-header">
+                <h3 class="card-t">Products Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 250px;">
+                    <input matInput (keyup)="applyFilter($event.target.value)" type="text" name="table_search"
+                      class="form-control float-right" placeholder="Search">
+                  </div>
+                </div>
+              </div>
+
+
+              <div class="card-body table-responsive p-0">
+
+
+                <table mat-table [dataSource]="dataSource" matSort class="table table-hover">
+
+                  <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ProductID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ProductName </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="brand">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ProductBrand </th>
+                    <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="productTypeName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ProductType </th>
+                    <td mat-cell *matCellDef="let element"> {{element.productTypeName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="description">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> description </th>
+                    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="priceKr">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> priceKr </th>
+                    <td mat-cell *matCellDef="let element"> {{element.priceKr}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="itemName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> itemName </th>
+                    <td mat-cell *matCellDef="let element"> {{element.itemName}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="onSale">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> onSale </th>
+                    <td mat-cell *matCellDef="let element"> {{element.onSale}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="isTrending">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> isTrending </th>
+                    <td mat-cell *matCellDef="let element"> {{element.isTrending}} </td>
+                  </ng-container>
+
+
+                  <ng-container matColumnDef="youtubeUrl">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> youtubeUrl </th>
+                    <td mat-cell *matCellDef="let element"> {{element.youtubeUrl}} </td>
+                  </ng-container>
+
+
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"
+                    [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}"
+                    (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></tr>
+                </table>
+
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+        </div>
+
+
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+
+<!-- Add modal -->
+<div class="modal fade" id="AddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Product Modal</h4>
+        <button #closeAddModal type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="productForm" (ngSubmit)="SubmitAddProduct()">
+          <div class="row pb-3">
+            <div class="col">
+              <select formControlName="itemId" class="form-control" required>
+                <option disabled selected>Choose Item</option>
+                <option *ngFor="let item of items" value="{{item.id}}">{{item?.name}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <select formControlName="productTypeId" class="form-control" required>
+                <option disabled selected>Select the ProductType</option>
+                <option *ngFor="let productType of productType" value="{{productType.id}}">{{productType?.type}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Product Name" formControlName="name" required>
+              <div class="text-danger"
+                *ngIf="!this.productForm.get('name').valid && this.productForm.get('name').touched">
+                *Product Name Required
+              </div>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Product Brand" formControlName="brand">
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Product Price Kr" formControlName="priceKr"
+                required>
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Youtube Embed URL" formControlName="youtubeUrl">
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <textarea class="form-control" placeholder="Description" rows="3"
+                formControlName="description"></textarea>
+            </div>
+          </div>
+
+          <div class="row pl-4">
+            <div class="col">
+              <input class="form-check-input" type="checkbox" value="onSale" id="onSale" formControlName="onSale">
+              <label class="form-check-label" for="onSale">
+                On Sale!
+              </label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" value="isTrending" id="isTrending"
+                formControlName="isTrending">
+              <label class="form-check-label" for="isTrending">
+                Is Trending!
+              </label>
+            </div>
+          </div>
+
+
+        </form>
+
+
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SubmitAddProduct()">Add Product</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- Edit modal -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Edit Product Modal</h4>
+        <button #closeEditModal type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form [formGroup]="productForm" (ngSubmit)="SubmitEditProduct(selection.selected[0].id)">
+          <div class="row pb-3">
+            <div class="col">
+              <select [ngModel]="selection.selected[0]?.itemId" formControlName="itemId" class="form-control">
+                <option value="" disabled selected>
+                  {{selection.selected[0]?.itemName}}</option>
+                <option *ngFor="let item of items" value="{{item.id}}">{{item?.name}}</option>
+              </select>
+            </div>
+            <div class="col">
+              <select [ngModel]="selection.selected[0]?.productTypeId" formControlName="productTypeId"
+                class="form-control">
+                <option value="" disabled selected>{{selection.selected[0]?.productTypeName}}</option>
+                <option *ngFor="let productType of productType" value="{{productType.id}}">{{productType?.type}}
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Product Name" [ngModel]="selection.selected[0]?.name"
+                value="{{selection.selected[0]?.name}}" formControlName="name" required>
+              <div class="invalid-feedback">
+                Please provide a valid Name.
+              </div>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Product Brand"
+                [ngModel]="selection.selected[0]?.brand" value="{{selection.selected[0]?.brand}}"
+                formControlName="brand">
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <input type="number" class="form-control" placeholder="Product Price Kr"
+                [ngModel]="selection.selected[0]?.priceKr" value="{{selection.selected[0]?.priceKr}}"
+                formControlName="priceKr" required>
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Youtube Embed URL"
+                [ngModel]="selection.selected[0]?.youtubeUrl" value="{{selection.selected[0]?.youtubeUrl}}"
+                formControlName="youtubeUrl">
+            </div>
+          </div>
+
+          <div class="row pb-3">
+            <div class="col">
+              <textarea class="form-control" placeholder="Description" [ngModel]="selection.selected[0]?.description"
+                value="{{selection.selected[0]?.description}}" rows="3" formControlName="description"></textarea>
+            </div>
+          </div>
+
+          <div class="row pl-4">
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="OnSale" [ngModel]="selection.selected[0]?.onSale"
+                [checked]="selection.selected[0]?.onSale" formControlName="onSale">
+              <label class="form-check-label" for="OnSale">
+                On Sale!
+              </label>
+            </div>
+            <div class="col">
+              <input class="form-check-input" type="checkbox" id="'isTrending" [ngModel]="selection.selected[0]?.isTrending"
+                [checked]="selection.selected[0]?.isTrending" formControlName="isTrending">
+              <label class="form-check-label" for="isTrending">
+                Is Trending!
+              </label>
+            </div>
+          </div>
+
+
+        </form>
+
+
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SubmitEditProduct(selection.selected[0].id)">Save
+          Change</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- Delete modal -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Delete Product Modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to delete Product name: <b>{{selection.selected[0]?.name}}</b> ID:
+          <b>{{selection.selected[0]?.id}}</b></p>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Delete Item</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
+<!-- ProductImgsModal modal -->
+<div class="modal fade" id="ProductImgsModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Product Images Modal</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+
+        <!-- <ul>
+          <li *ngFor="let selectedproductImg of selection.selected[0]?.productImages" class="item">
+            <div >
+              <img src="../../../{{selectedproductImg}}" class="w-25">
+            </div>
+            <div>
+              <span class="product-description">
+                {{selectedproductImg}}
+              </span>
+            </div>
+          </li>
+        </ul> -->
+
+        <table class="table table-borderless">
+          <tbody>
+            <tr *ngFor="let selectedproductImg of selection.selected[0]?.productImages">
+              <td style="width: 30%;" class="text-center"><img src="../../../{{selectedproductImg}}" class="w-50"></td>
+              <!-- <td style="width: 70%;"><span class="text-wrap" >{{selectedproductImg}}</span></td> -->
+              <td style="width: 70%;"><textarea class="form-control text-wrap" placeholder="Image URL"
+                  disabled>{{selectedproductImg}}</textarea></td>
+            </tr>
+          </tbody>
+        </table>
+
+
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->

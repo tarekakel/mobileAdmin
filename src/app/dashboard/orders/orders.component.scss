@@ -1,0 +1,31 @@
+table {
+  width: 100%;
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.mat-header-cell {
+  height: auto;
+  padding: 8px 8px 8px 0;
+}
+
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}
+
+.mat-row.hovered {
+  background: #eee;
+}
+
+.mat-row.highlighted {
+background: rgb(228, 228, 228);
+}
+
+a.one:link {color: blue;}
+a.one:hover {color:#ffcc00;}
